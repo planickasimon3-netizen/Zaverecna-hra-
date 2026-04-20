@@ -54,7 +54,7 @@ case 1:
 case 2:
 			cout << "Zvolil jsi obránce!" << endl;
     		maxHp = 25;
-   		hp = 25;
+   	hp = 25;
     		maxMana = 10;
     		mana = 10;
     		gold = 5;
@@ -62,8 +62,8 @@ case 2:
     		xp = 0;
     		ability = "1, Shield - cena(2 mana, obrana na jadno kolo) 2, Defend attack - cena(0 mana, 2 damage) 3, Ultimate - cena(5 mana, 10 damage)";
     		abilityManaCost[0]={2, 0, 5};
-			abilityDamage[0]={0, 2, 10};
-			break;
+    abilityDamage[0]={0, 2, 10};
+	break;
 
 case 3:
     cout << "Zvolil jsi čaroděje!" << endl;
