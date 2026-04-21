@@ -11,8 +11,10 @@ return a+b+c+d+e+f+g+h;
 
 
 int main(){
+
 srand(time(0));
-int vyberposatvy;
+int vyber_posatvy;
+int vyber_ve_vesnici;
 
 struct postava{
 
@@ -39,10 +41,11 @@ struct Monster {
 };
 */
 
-cout << "Zadej cislo sve postavy: " << "1, Utocnik; 2, Obrance; 3, Carodej; 4, Medic: " << endl;
-cin >> vyberposatvy;
+cout << "Zadej cislo sve postavy: " << "1, Utocnik; 2, Obrance; 3, Carodej; 4, Medic: ";
+cout << endl;
+cin >> vyber_posatvy;
 
-switch (vyberposatvy){
+switch (vyber_posatvy){
 
 case 1:
 
@@ -66,7 +69,7 @@ break;
 
 case 2:
 
-cout << "Zvolil jsi Obrance!" << endl;
+cout << "Zvolil jsi Obrance!" << endl << endl;
 obrance.maxHp = 25;
 obrance.hp = 25;
 obrance.maxMana = 10;
@@ -85,7 +88,7 @@ break;
 
 case 3:
 
-cout << "Zvolil jsi Carodeje!" << endl;
+cout << "Zvolil jsi Carodeje!" << endl << endl;
 carodej.maxHp = 15;
 carodej.hp = 15;
 carodej.maxMana = 25;
@@ -104,7 +107,7 @@ break;
 
 case 4:
 
-cout << "Zvolil jsi Medika!" << endl;
+cout << "Zvolil jsi Medika!" << endl << endl;
 medic.maxHp = 18;
 medic.hp = 18;
 medic.maxMana = 20;
@@ -122,5 +125,27 @@ medic.abilityDamage[2] = 15;
 
 }
 
-cout << "Zvolil jsi postavu: " << endl;
+cout << "Dosel jsi do vesnice," << " muzes si: 1: Doplnit zivoty(3 goldy)" << endl << "                                " << "2: Zvetsit maximalni pocet zivotu o 2(5 goldu)" << endl << "                                " << "3: Zvetsit maximalni manu o 5(5 goldu)" << endl << "                                " << "4: Vylepsit utok(5 goldu)" << endl << "                                " << "5: Pokracovat do boje" << endl;
+cin >> vyber_ve_vesnici;
+
+switch (vyber_ve_vesnici){
+
+case 1: 
+medic.maxHp = medic.hp + 5;
+medic.gold = medic.gold - 3;
+break;  
+
+case 2:
+medic.maxHp = medic.maxHp + 2;
+medic.gold = medic.gold - 5;
+break;
+
+case 3:
+medic.maxMana = medic.maxMana + 5;
+medic.gold = medic.gold - 5;
+break;
 }
+
+cout << medic.maxHp << endl;
+
+}   
