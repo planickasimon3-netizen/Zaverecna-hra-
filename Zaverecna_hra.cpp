@@ -128,23 +128,38 @@ medic.abilityDamage[2] = 15;
 cout << "Dosel jsi do vesnice," << " muzes si: 1: Doplnit zivoty(3 goldy)" << endl << "                                " << "2: Zvetsit maximalni pocet zivotu o 2(5 goldu)" << endl << "                                " << "3: Zvetsit maximalni manu o 5(5 goldu)" << endl << "                                " << "4: Vylepsit utok(5 goldu)" << endl << "                                " << "5: Pokracovat do boje" << endl;
 cin >> vyber_ve_vesnici;
 
-switch (vyber_ve_vesnici){
+if(vyber_ve_vesnici == 1){
 
-case 1: 
-medic.maxHp = medic.hp + 5;
+uticnik.hp = utocnik.hp + 5;
+utocnik.gold = utocnik.gold - 3;
+obrance.hp = obrance.hp + 5;
+obrance.gold = obrance.gold - 3;
+carodej.hp = carodej.hp + 5;
+carodej.gold = carodej.gold - 3;
+medic.hp = medic.hp + 5;
 medic.gold = medic.gold - 3;
-break;  
-
-case 2:
+}else if(vyber_ve_vesnici == 2){
+utocnik.maxHp = utocnik.maxHp + 2;
+utocnik.gold = utocnik.gold - 5;
+obrance.maxHp = obrance.maxHp + 2;
+obrance.gold = obrance.gold - 5;
+carodej.maxHp = carodej.maxHp + 2;
+carodej.gold = carodej.gold - 5;
 medic.maxHp = medic.maxHp + 2;
 medic.gold = medic.gold - 5;
-break;
-
-case 3:
+}else if(vyber_ve_vesnici == 3){
+utocnik.maxMana = utocnik.maxMana + 5;
+utocnik.gold = utocnik.gold - 5;
+obrance.maxMana = obrance.maxMana + 5;
+obrance.gold = obrance.gold - 5;
+carodej.maxMana = carodej.maxMana + 5;
+carodej.gold = carodej.gold - 5;
 medic.maxMana = medic.maxMana + 5;
 medic.gold = medic.gold - 5;
-break;
-}
+}else if(vyber_ve_vesnici == 4){
+
+}else{cout << "Chyba zadali jste neeplatne cislo";}
+
 
 cout << medic.maxHp << endl;
 
