@@ -65,6 +65,11 @@ utocnik.abilityManaCost[2] = 5;
 utocnik.abilityDamage[0] = 5;
 utocnik.abilityDamage[1] = 2;
 utocnik.abilityDamage[2] = 10;
+cout << "Mate k dispozici tyto schopnosti: " << utocnik.ability << endl;
+cout << "Mate " << utocnik.hp << " zivotu a " << utocnik.mana << " many" << endl;
+cout << "Mate " << utocnik.gold << " goldu" << endl;
+cout << "Mate " << utocnik.xp << " zkusenosti" << endl;
+cout << "Mate " << utocnik.level << " level" << endl;
 break;
 
 case 2:
@@ -84,6 +89,11 @@ obrance.abilityManaCost[2]= 5;
 obrance.abilityDamage[0] = 0;
 obrance.abilityDamage[1] = 2;
 obrance.abilityDamage[2] = 10;
+cout << "Mate k dispozici tyto schopnosti: " << obrance.ability << endl;
+cout << "Mate " << obrance.hp << " zivotu a " << obrance.mana << " many" << endl;
+cout << "Mate " << obrance.gold << " goldu" << endl;
+cout << "Mate " << obrance.xp << " zkusenosti" << endl;
+cout << "Mate " << obrance.level << " level" << endl;
 break;
 
 case 3:
@@ -103,6 +113,11 @@ carodej.abilityManaCost[2] = 10;
 carodej.abilityDamage[0] = 10;
 carodej.abilityDamage[1] = 5;
 carodej.abilityDamage[2] = 20;
+cout << "Mate k dispozici tyto schopnosti: " << carodej.ability << endl;
+cout << "Mate " << carodej.hp << " zivotu a " << carodej.mana << " many" << endl;
+cout << "Mate " << carodej.gold << " goldu" << endl;
+cout << "Mate " << carodej.xp << " zkusenosti" << endl;
+cout << "Mate " << carodej.level << " level" << endl;
 break;
 
 case 4:
@@ -122,6 +137,12 @@ medic.abilityManaCost[2] = 7;
 medic.abilityDamage[0] = -5;
 medic.abilityDamage[1] = 2;
 medic.abilityDamage[2] = 15;
+cout << "Mate k dispozici tyto schopnosti: " << medic.ability << endl;
+cout << "Mate " << medic.hp << " zivotu a " << medic.mana << " many" << endl;
+cout << "Mate " << medic.gold << " goldu" << endl;
+cout << "Mate " << medic.xp << " zkusenosti" << endl;
+cout << "Mate " << medic.level << " level" << endl;
+break;
 
 }
 
