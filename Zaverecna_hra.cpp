@@ -8,8 +8,17 @@ int secti(int a = 0, int b = 0, int c = 0, int d = 0, int e = 0, int f = 0, int 
 return a+b+c+d+e+f+g+h;
 
 }
+void goblin(){
+    goblin.name = "Goblin";
+    goblin.hp = 20;
+    goblin.attack = 2;
+    goblin.goldDrop = 3;
+}
 
-
+void bigboss(){
+    bigbos.name = "Rostliný parazit";
+    bigbos.hp = 100;
+}
 int main(){
 
 srand(time(0));
@@ -31,15 +40,16 @@ int abilityDamage [3] = { 0,1,2};
 
 }utocnik, obrance, carodej, medic;
 
-/*
+
 struct Monster {
-    string name;
-    int hp;
-    int attack;
-    int goldDrop;
-    bool isBoss;
-};
-*/
+string name;
+int hp;
+int attack;
+int goldDrop;
+bool isBoss;
+}goblin, minibos, bigbos;
+
+do{ 
 
 cout << "Zadej cislo sve postavy: " << "1, Utocnik; 2, Obrance; 3, Carodej; 4, Medic: ";
 cout << endl;
@@ -144,7 +154,14 @@ cout << "Mate " << medic.xp << " zkusenosti" << endl;
 cout << "Mate " << medic.level << " level" << endl;
 break;
 
+default: cout << "Neplate cislo, zkus to znovu" << endl;
+
+}while(vyber_postavy < 1 || vyber_postsvy > 5);
+
+
+
 }
+do{
 
 cout << "Dosel jsi do vesnice," << " muzes si: 1: Doplnit zivoty(3 goldy)" << endl << "                                " << "2: Zvetsit maximalni pocet zivotu o 2(5 goldu)" << endl << "                                " << "3: Zvetsit maximalni manu o 5(5 goldu)" << endl << "                                " << "4: Vylepsit utok(5 goldu)" << endl << "                                " << "5: Pokracovat do boje" << endl;
 cin >> vyber_ve_vesnici;
@@ -159,7 +176,9 @@ carodej.hp = carodej.hp + 5;
 carodej.gold = carodej.gold - 3;
 medic.hp = medic.hp + 5;
 medic.gold = medic.gold - 3;
+
 }else if(vyber_ve_vesnici == 2){
+
 utocnik.maxHp = utocnik.maxHp + 2;
 utocnik.gold = utocnik.gold - 5;
 obrance.maxHp = obrance.maxHp + 2;
@@ -168,7 +187,9 @@ carodej.maxHp = carodej.maxHp + 2;
 carodej.gold = carodej.gold - 5;
 medic.maxHp = medic.maxHp + 2;
 medic.gold = medic.gold - 5;
+
 }else if(vyber_ve_vesnici == 3){
+
 utocnik.maxMana = utocnik.maxMana + 5;
 utocnik.gold = utocnik.gold - 5;
 obrance.maxMana = obrance.maxMana + 5;
@@ -177,11 +198,17 @@ carodej.maxMana = carodej.maxMana + 5;
 carodej.gold = carodej.gold - 5;
 medic.maxMana = medic.maxMana + 5;
 medic.gold = medic.gold - 5;
+
 }else if(vyber_ve_vesnici == 4){
 
 }else{cout << "Chyba zadali jste neeplatne cislo";}
 
+}while(vyber_ve_vesnici < 1 || vyber_ve_vesnici > 5);
 
-cout << medic.maxHp << endl;
+cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: ";
+cin >>
+
+
+
 
 }   
