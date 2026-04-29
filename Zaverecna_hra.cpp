@@ -1,7 +1,10 @@
 #include <iostream>
-using namespace std;
+#include <string>
 #include <ctime>
+#include <cstdlib>
 #include <cmath>
+
+using namespace std;
 
 int secti(int a = 0, int b = 0, int c = 0, int d = 0, int e = 0, int f = 0, int g = 0, int h = 0){
 
@@ -12,9 +15,9 @@ return a+b+c+d+e+f+g+h;
 int main(){
 
     srand(time(0));
-    int vyber_utoku;
-    int vyber_ability;
-    int vyber_posatvy;
+    int vyber_utoku = 1;
+    int vyber_ability = 1;
+    int vyber_postavy;
     int vyber_ve_vesnici;
     int random_cislo_powerhit;
     int random_cislo_uhyb;
@@ -41,10 +44,11 @@ int main(){
     int attack;
     int powerhit;
     int goldDrop;
+    int xpdrop;
     bool isBoss;
     }goblin, goblin1, goblin2, minibos, bigbos;
 
-    bigbos.name = "Rostliný parazit";
+    bigbos.name = "Rostliny parazit";
     bigbos.hp = 100;
 
     goblin.name = "Goblin";
@@ -52,27 +56,29 @@ int main(){
     goblin.attack = 2;
     goblin.powerhit = 5;
     goblin.goldDrop = 3;
+    goblin.xpdrop = 5;
 
     goblin1.name = "Goblin";
     goblin1.hp = 20;
     goblin1.attack = 2;
     goblin1.powerhit = 5;
     goblin1.goldDrop = 3;
+    goblin1.xpdrop = 5;
 
     goblin2.name = "Goblin";
     goblin2.hp = 20;
     goblin2.attack = 2;
     goblin2.powerhit = 5;
     goblin2.goldDrop = 3;
-
+    goblin2.xpdrop = 5;
 
     do{ 
 
     cout << "Zadej cislo sve postavy: " << "1, Utocnik; 2, Obrance; 3, Carodej; 4, Medic: ";
     cout << endl;
-    cin >> vyber_posatvy;
+    cin >> vyber_postavy;
 
-    switch (vyber_posatvy){
+    switch (vyber_postavy){
 
     case 1:
 
@@ -173,11 +179,11 @@ int main(){
 
     default: cout << "Neplate cislo, zkus to znovu" << endl;
 
+    }
+
     }while(vyber_postavy < 1 || vyber_postavy > 5);
 
 
-
-    }
     do{
 
         cout << "Dosel jsi do vesnice," << " muzes si: 1: Doplnit zivoty(3 goldy)" << endl << "                                " << "2: Zvetsit maximalni pocet zivotu o 2(5 goldu)" << endl << "                                " << "3: Zvetsit maximalni manu o 5(5 goldu)" << endl << "                                " << "4: Vylepsit utok(5 goldu)" << endl << "                                " << "5: Pokracovat do boje" << endl;
@@ -185,7 +191,7 @@ int main(){
 
         if(vyber_ve_vesnici == 1){
 
-        uticnik.hp = utocnik.hp + 5;
+        utocnik.hp = utocnik.hp + 5;
         utocnik.gold = utocnik.gold - 3;
         obrance.hp = obrance.hp + 5;
         obrance.gold = obrance.gold - 3;
@@ -220,19 +226,25 @@ int main(){
 
         }else{cout << "Chyba zadali jste neeplatne cislo";}
 
+        
+
     }while(vyber_ve_vesnici < 1 || vyber_ve_vesnici > 5);
 
     /*První souboj s Goblinem*/
 
+    cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << utocnik.ability << endl;
+    cin >> vyber_ability;
+
+    goblin.hp = 20;
+    goblin1.hp = 20;
+    goblin2.hp = 20;
     do{
         do{
             random_cislo_powerhit = rand() % 100 + 1;
             random_cislo_uhyb = rand() % 100 + 1;
 
-            if(vyber_posatvy == 1){
+            if(vyber_postavy == 1){
 
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << utocnik.ability << endl;
-                cin >> vyber_ability;
 
                 if (vyber_ability == 1){
 
@@ -270,7 +282,7 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    utocnik.hp = utocnik.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
@@ -285,8 +297,6 @@ int main(){
 
             }else if(vyber_postavy == 2){
 
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << obrance.ability << endl;
-                cin >> vyber_ability;
 
                 if (vyber_ability == 1){
 
@@ -295,11 +305,11 @@ int main(){
                         cout << "Pouzil jsi Shield a obranil jsi se na jedno kolo" << endl;
                         obrance.mana = obrance.mana - obrance.abilityManaCost[0];
                         goblin.attack = 0;
-                        goblin.attackpowerhit = 0;
+                        goblin.powerhit = 0;
                         goblin1.attack = 0;
-                        goblin1.attackpowerhit = 0;
+                        goblin1.powerhit = 0;
                         goblin2.attack = 0;
-                        goblin2.attackpowerhit = 0;
+                        goblin2.powerhit = 0;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
 
@@ -327,11 +337,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    obrance.hp = obrance.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    obrance.hp = obrance.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -340,9 +350,6 @@ int main(){
                 }
 
             }else if(vyber_postavy == 3){
-
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << carodej.ability << endl;
-                cin >> vyber_ability;
 
                 if (vyber_ability == 1){
 
@@ -359,9 +366,9 @@ int main(){
 
                     if(carodej.mana >= carodej.abilityManaCost[1]){
 
-                        cout << "Pouzil jsi Heal a vylecil jsi se o " << -carodej.abilityDamage[1] << " hp" << endl;
+                        cout << "Pouzil jsi Heal a vylecil jsi se o " << carodej.abilityDamage[1] << " hp" << endl;
                         carodej.mana = carodej.mana - carodej.abilityManaCost[1];
-                        carodej.hp = carodej.hp - carodej.abilityDamage[1];
+                        carodej.hp = carodej.hp + carodej.abilityDamage[1];
                         cout << "Tobě zbylo " << carodej.hp << " hp" << endl;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
@@ -382,11 +389,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    carodej.hp = carodej.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    carodej.hp = carodej.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -395,9 +402,7 @@ int main(){
                 }
                     
             }else if(vyber_postavy == 4){
-                
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << medic.ability << endl;
-                cin >> vyber_ability;
+        
 
                 if (vyber_ability == 1){
 
@@ -438,11 +443,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    medic.hp = medic.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    medic.hp = medic.hp - goblin.attack;
                 }
 
                 if (random_cislo_uhyb <= 30){
@@ -455,20 +460,39 @@ int main(){
 
         }while(vyber_ability < 1 || vyber_ability > 3);
     }while(goblin.hp > 0);
+
+    utocnik.mana = utocnik.mana + 5;
+    utocnik.xp = utocnik.xp + goblin.xpdrop;
+    utocnik.gold = utocnik.gold + goblin.goldDrop;
+
+    obrance.mana = obrance.mana + 5;
+    obrance.xp = obrance.xp + goblin.xpdrop;
+    obrance.gold = obrance.gold + goblin.goldDrop;
+
+    carodej.mana = carodej.mana + 5;
+    carodej.xp = carodej.xp + goblin.xpdrop;
+    carodej.gold = carodej.gold + goblin.goldDrop;
+
+    medic.mana = medic.mana + 5;
+    medic.xp = medic.xp + goblin.xpdrop;
+    medic.gold = medic.gold + goblin.goldDrop;
 
 
     /*Druhý souboj s Goblinem*/
 
+    cout << "Narazil jsi na monstrum, musis s nim bojovat, jako abilitu chces pouzit: " << utocnik.ability << endl;
+    cin >> vyber_ability;
 
+    goblin.hp = 20;
+    goblin1.hp = 20;
+    goblin2.hp = 20;
     do{
         do{
+
             random_cislo_powerhit = rand() % 100 + 1;
             random_cislo_uhyb = rand() % 100 + 1;
 
-            if(vyber_posatvy == 1){
-
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << utocnik.ability << endl;
-                cin >> vyber_ability;
+            if(vyber_postavy == 1){
 
                 if (vyber_ability == 1){
 
@@ -506,7 +530,7 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    utocnik.hp = utocnik.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
@@ -521,9 +545,6 @@ int main(){
 
             }else if(vyber_postavy == 2){
 
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << obrance.ability << endl;
-                cin >> vyber_ability;
-
                 if (vyber_ability == 1){
 
                     if(obrance.mana >= obrance.abilityManaCost[0]){
@@ -531,11 +552,11 @@ int main(){
                         cout << "Pouzil jsi Shield a obranil jsi se na jedno kolo" << endl;
                         obrance.mana = obrance.mana - obrance.abilityManaCost[0];
                         goblin.attack = 0;
-                        goblin.attackpowerhit = 0;
+                        goblin.powerhit = 0;
                         goblin1.attack = 0;
-                        goblin1.attackpowerhit = 0;
+                        goblin1.powerhit = 0;
                         goblin2.attack = 0;
-                        goblin2.attackpowerhit = 0;
+                        goblin2.powerhit = 0;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
 
@@ -563,11 +584,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    obrance.hp = obrance.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    obrance.hp = obrance.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -576,9 +597,6 @@ int main(){
                 }
 
             }else if(vyber_postavy == 3){
-
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << carodej.ability << endl;
-                cin >> vyber_ability;
 
                 if (vyber_ability == 1){
 
@@ -595,9 +613,9 @@ int main(){
 
                     if(carodej.mana >= carodej.abilityManaCost[1]){
 
-                        cout << "Pouzil jsi Heal a vylecil jsi se o " << -carodej.abilityDamage[1] << " hp" << endl;
+                        cout << "Pouzil jsi Heal a vylecil jsi se o " << carodej.abilityDamage[1] << " hp" << endl;
                         carodej.mana = carodej.mana - carodej.abilityManaCost[1];
-                        carodej.hp = carodej.hp - carodej.abilityDamage[1];
+                        carodej.hp = carodej.hp + carodej.abilityDamage[1];
                         cout << "Tobě zbylo " << carodej.hp << " hp" << endl;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
@@ -618,11 +636,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    carodej.hp = carodej.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    carodej.hp = carodej.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -631,9 +649,6 @@ int main(){
                 }
                     
             }else if(vyber_postavy == 4){
-                
-                cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << medic.ability << endl;
-                cin >> vyber_ability;
 
                 if (vyber_ability == 1){
 
@@ -674,11 +689,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    medic.hp = medic.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    medic.hp = medic.hp - goblin.attack;
                 }
 
                 if (random_cislo_uhyb <= 30){
@@ -692,13 +707,30 @@ int main(){
         }while(vyber_ability < 1 || vyber_ability > 3);
     }while(goblin.hp > 0);
 
+    utocnik.mana = utocnik.mana + 5;
+    utocnik.xp = utocnik.xp + goblin.xpdrop;
+    utocnik.gold = utocnik.gold + goblin.goldDrop;
+
+    obrance.mana = obrance.mana + 5;
+    obrance.xp = obrance.xp + goblin.xpdrop;
+    obrance.gold = obrance.gold + goblin.goldDrop;
+
+    carodej.mana = carodej.mana + 5;
+    carodej.xp = carodej.xp + goblin.xpdrop;
+    carodej.gold = carodej.gold + goblin.goldDrop;
+
+    medic.mana = medic.mana + 5;
+    medic.xp = medic.xp + goblin.xpdrop;
+    medic.gold = medic.gold + goblin.goldDrop;
+
     /*Třetí souboj s dvěma Goblinama*/
 
 
+    goblin.hp = 20;
+    goblin1.hp = 20;
+    goblin2.hp = 20;
     do{
-        cout << "Narazil jsi na dvě monstrum, musíš s nimi bojovat, na jakého chceš útočit?" << endl << "1, Goblin 1" << endl << "2, Goblin 2" << endl;
-        cin >> vyber_utoku;
-
+        
         do{
 
             if(vyber_utoku == 1){
@@ -706,7 +738,7 @@ int main(){
             random_cislo_powerhit = rand() % 100 + 1;
             random_cislo_uhyb = rand() % 100 + 1;
 
-            if(vyber_posatvy == 1){
+            if(vyber_postavy == 1){
 
                 cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << utocnik.ability << endl;
                 cin >> vyber_ability;
@@ -747,7 +779,7 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    utocnik.hp = utocnik.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
@@ -772,11 +804,11 @@ int main(){
                         cout << "Pouzil jsi Shield a obranil jsi se na jedno kolo" << endl;
                         obrance.mana = obrance.mana - obrance.abilityManaCost[0];
                         goblin.attack = 0;
-                        goblin.attackpowerhit = 0;
+                        goblin.powerhit = 0;
                         goblin1.attack = 0;
-                        goblin1.attackpowerhit = 0;
+                        goblin1.powerhit = 0;
                         goblin2.attack = 0;
-                        goblin2.attackpowerhit = 0;
+                        goblin2.powerhit = 0;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
 
@@ -804,11 +836,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    obrance.hp = obrance.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    obrance.hp = obrance.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -836,9 +868,9 @@ int main(){
 
                     if(carodej.mana >= carodej.abilityManaCost[1]){
 
-                        cout << "Pouzil jsi Heal a vylecil jsi se o " << -carodej.abilityDamage[1] << " hp" << endl;
+                        cout << "Pouzil jsi Heal a vylecil jsi se o " << carodej.abilityDamage[1] << " hp" << endl;
                         carodej.mana = carodej.mana - carodej.abilityManaCost[1];
-                        carodej.hp = carodej.hp - carodej.abilityDamage[1];
+                        carodej.hp = carodej.hp + carodej.abilityDamage[1];
                         cout << "Tobě zbylo " << carodej.hp << " hp" << endl;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
@@ -859,11 +891,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    carodej.hp = carodej.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    carodej.hp = carodej.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -915,11 +947,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    medic.hp = medic.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    medic.hp = medic.hp - goblin.attack;
                 }
 
                 if (random_cislo_uhyb <= 30){
@@ -934,7 +966,7 @@ int main(){
             random_cislo_powerhit = rand() % 100 + 1;
             random_cislo_uhyb = rand() % 100 + 1;
 
-            if(vyber_posatvy == 1){
+            if(vyber_postavy == 1){
 
                 cout << "Narazil jsi na monstrum, musíš s ním bojovat, jako abilitu chceš použít: " << utocnik.ability << endl;
                 cin >> vyber_ability;
@@ -975,7 +1007,7 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    utocnik.hp = utocnik.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
@@ -1000,11 +1032,11 @@ int main(){
                         cout << "Pouzil jsi Shield a obranil jsi se na jedno kolo" << endl;
                         obrance.mana = obrance.mana - obrance.abilityManaCost[0];
                         goblin.attack = 0;
-                        goblin.attackpowerhit = 0;
+                        goblin.powerhit = 0;
                         goblin1.attack = 0;
-                        goblin1.attackpowerhit = 0;
+                        goblin1.powerhit = 0;
                         goblin2.attack = 0;
-                        goblin2.attackpowerhit = 0;
+                        goblin2.powerhit = 0;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
 
@@ -1032,11 +1064,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    obrance.hp = obrance.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    obrance.hp = obrance.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -1064,9 +1096,9 @@ int main(){
 
                     if(carodej.mana >= carodej.abilityManaCost[1]){
 
-                        cout << "Pouzil jsi Heal a vylecil jsi se o " << -carodej.abilityDamage[1] << " hp" << endl;
+                        cout << "Pouzil jsi Heal a vylecil jsi se o " << carodej.abilityDamage[1] << " hp" << endl;
                         carodej.mana = carodej.mana - carodej.abilityManaCost[1];
-                        carodej.hp = carodej.hp - carodej.abilityDamage[1];
+                        carodej.hp = carodej.hp + carodej.abilityDamage[1];
                         cout << "Tobě zbylo " << carodej.hp << " hp" << endl;
 
                     }else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
@@ -1087,11 +1119,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    carodej.hp = carodej.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
                     
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    carodej.hp = carodej.hp - goblin.attack;
                 }
                 
                 if (random_cislo_uhyb <= 30){
@@ -1143,11 +1175,11 @@ int main(){
                 if (random_cislo_powerhit <= 20){
                     
                     cout << "Goblin ti dal powerhit" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attackpowerhit;
+                    medic.hp = medic.hp - goblin.powerhit;
                 }else if(random_cislo_powerhit > 20){
 
                     cout << "Goblin ti dal normalni utok" << endl;
-                    utocnik.hp = utocnik.hp - goblin.attack;
+                    medic.hp = medic.hp - goblin.attack;
                 }
 
                 if (random_cislo_uhyb <= 30){
@@ -1159,4 +1191,6 @@ int main(){
             }
         }while(vyber_ability < 1 || vyber_ability > 3);
     }while(goblin.hp > 0);
+
+    return 0;
 }
