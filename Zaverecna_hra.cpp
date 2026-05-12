@@ -3185,7 +3185,7 @@ do{
                     cout << "Goblin ti dal normalni utok" << endl;
                     hrac.hp = hrac.hp - goblin.attack;
                 }
-            }else if(vyber_utoku == 4){
+    }else if(vyber_utoku == 4){
 
 
     do {
@@ -3355,8 +3355,11 @@ do{
 
 
     }
-
-}while(goblin.hp > 1 || goblin1.hp > 1 || goblin2.hp > 1 );
+            }
+        }
+    }
+}
+    }while(goblin.hp > 1 || goblin1.hp > 1 || goblin2.hp > 1 );
 }while(vyber_utoku < 1 || vyber_utoku > 4);
 
 
