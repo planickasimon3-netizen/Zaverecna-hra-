@@ -3365,176 +3365,131 @@ do{
 
     /*----11 SOUBOJ S HLAVNÍM BOSEM-----*/
 
-cout << "Narazil jsi na hlavniho bose, pokud ho porazis stanes se legendou, poku prohrajes, zemres a tve jmeno bude navzdy zapomenuto" << hrac.ability << "4) Pockas nez se bos uklidni"<< endl;
+cout << "Narazil jsi na hlavniho bosse - Bloomshade! Rostlinny parazit, co se maskuje jako kvetina." << endl;
+cout << "Pokud ho porazis stanes se legendou, pokud prohrajes, zemres a tve jmeno bude navzdy zapomenuto." << endl;
+cout << hrac.ability << " 4) Pockas nez se boss uklidni" << endl;
 
-do {
-    do {
-            while(goblin.hp > 1){
+bool nastvany = false;
+int bonus_poskozeni = 0;
+int cekani = 0;
+bool prvni_tah = true;
 
+while (bbos.hp > 0 && hrac.hp > 0) {
+    cout << endl << "Co mu provedeme ted: ";
+    cin >> vyber_ability;
 
-            cout << endl << "Co mu provedeme ted: ";
-            cin >> vyber_ability;
-            random_cislo_powerhit = rand() % 100 + 1;
-            random_cislo_uhyb = rand() % 100 + 1;
+    bool utocil_tento_tah = false;
+    bool uspesna_akce = false; 
 
-            if (vyber_postavy == 1) {
-                if (vyber_ability == 1) {
-                    if (hrac.mana >= hrac.abilityManaCost[0]) {
-                        cout << "Pouzil jsi Powerhit a udelil jsi " << hrac.abilityDamage[0] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[0];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[0];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 2) {
-                    if (hrac.mana >= hrac.abilityManaCost[1]) {
-                        cout << "Pouzil jsi Basic attack a udelil jsi " << hrac.abilityDamage[1] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[1];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[1];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 3) {
-                    if (hrac.mana >= hrac.abilityManaCost[2]) {
-                        cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[2];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[2];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    }else if(vyber_ability == 4) {
-                        cout << "Cekas jedno kolo aby se boss uklidnil" << endl;
-
-                    }else{ cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                }
-
-                if (random_cislo_uhyb <= 30) {
-                    cout << "Uhybl jsi, bigbos te netrefil" << endl;
-                }else if(random_cislo_powerhit >= 31 || random_cislo_powerhit <= 80){
-                    cout << "Bigbos ti dal powerhit" << endl;
-                    hrac.hp = hrac.hp - goblin.powerhit;
-                }else if (random_cislo_powerhit >= 81){
-                    cout << "Bigbos ti dal normalni utok" << endl;
-                    hrac.hp = hrac.hp - goblin.attack;
-                }
-
-            } else if (vyber_postavy == 2) {
-                if (vyber_ability == 1) {
-                    if (hrac.mana >= hrac.abilityManaCost[0]) {
-                        cout << "Pouzil jsi Shield a obranil jsi se na jedno kolo" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[0];
-                        bbos.attack = 0;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 2) {
-                    if (hrac.mana >= hrac.abilityManaCost[1]) {
-                        cout << "Pouzil jsi Defend attack a udelil jsi " << hrac.abilityDamage[1] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[1];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[1];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 3) {
-                    if (hrac.mana >= hrac.abilityManaCost[2]) {
-                        cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[2];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[2];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    }else if(vyber_ability == 4) {
-                        cout << "Cekas jedno kolo aby se boss uklidnil" << endl;}
-                    else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                }
-
-                if (random_cislo_uhyb <= 30) {
-                    cout << "Uhybl jsi, bigbos te netrefil" << endl;
-                }else if(random_cislo_powerhit >= 31 || random_cislo_powerhit <= 80){
-                    cout << "Bigbos ti dal powerhit" << endl;
-                    hrac.hp = hrac.hp - goblin.powerhit;
-                }else if (random_cislo_powerhit >= 81){
-                    cout << "Bigbos ti dal normalni utok" << endl;
-                    hrac.hp = hrac.hp - goblin.attack;
-                }
-
-            } else if (vyber_postavy == 3) {
-                if (vyber_ability == 1) {
-                    if (hrac.mana >= hrac.abilityManaCost[0]){
-                        cout << "Pouzil jsi Fireball a udelil jsi " << hrac.abilityDamage[0] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[0];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[0];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 2) {
-                    if (hrac.mana >= hrac.abilityManaCost[1]){
-                        cout << "Pouzil jsi Heal a vylecil jsi se o " << -hrac.abilityDamage[1] << " hp" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[1];
-                        hrac.hp = hrac.hp - hrac.abilityDamage[1];
-                        cout << "Tobe zbylo " << hrac.hp << " hp" << endl;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 3) {
-                    if (hrac.mana >= hrac.abilityManaCost[2]){
-                        cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[2];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[2];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    }else if(vyber_ability == 4){
-                        cout << "Cekas jedno kolo aby se boss uklidnil" << endl;}
-                    else{cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
-                }
-
-                if (random_cislo_uhyb <= 30) {
-                    cout << "Uhybl jsi, bigbos te netrefil" << endl;
-                }else if(random_cislo_powerhit >= 31 || random_cislo_powerhit <= 80){
-                    cout << "Bigbos ti dal powerhit" << endl;
-                    hrac.hp = hrac.hp - goblin.powerhit;
-                }else if (random_cislo_powerhit >= 81){
-                    cout << "Bigbos ti dal normalni utok" << endl;
-                    hrac.hp = hrac.hp - goblin.attack;
-                }
-
-            } else if (vyber_postavy == 4) {
-                if (vyber_ability == 1) {
-                    if (hrac.mana >= hrac.abilityManaCost[0]) {
-                        cout << "Pouzil jsi Heal a vylecil jsi se o " << -hrac.abilityDamage[0] << " hp" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[0];
-                        hrac.hp = hrac.hp - hrac.abilityDamage[0];
-                        cout << "Tobe zbylo " << hrac.hp << " hp" << endl;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 2) {
-                    if (hrac.mana >= hrac.abilityManaCost[1]) {
-                        cout << "Pouzil jsi Attack a udelil jsi " << hrac.abilityDamage[1] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[1];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[1];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    } else { cout << "Nemate dost many, zvolte jinou abilitu" << endl; }
-                } else if (vyber_ability == 3) {
-                    if (hrac.mana >= hrac.abilityManaCost[2]) {
-                        cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
-                        hrac.mana = hrac.mana - hrac.abilityManaCost[2];
-                        bbos.hp = bbos.hp - hrac.abilityDamage[2];
-                        cout << "Bigbossovy zbylo " << bbos.hp << " hp" << endl;
-                    }else if(vyber_ability == 4){
-                        cout << "Cekas jedno kolo aby se boss uklidnil" << endl;
-                    }else{ cout << "Nemate dost many, zvolte jinou abilitu" << endl;}
-                }
-
-                if (random_cislo_uhyb <= 30) {
-                    cout << "Uhybl jsi, bigbos te netrefil" << endl;
-                }else if(random_cislo_powerhit >= 31 || random_cislo_powerhit <= 80){
-                    cout << "Bigbos ti dal powerhit" << endl;
-                    hrac.hp = hrac.hp - goblin.powerhit;
-                }else if (random_cislo_powerhit >= 81){
-                    cout << "Bigbos ti dal normalni utok" << endl;
-                    hrac.hp = hrac.hp - goblin.attack;
-                }
-
-            }
-
-            cout << "Zbylo ti: " << hrac.hp << "hp" << endl;
-            cout << "Mas " << hrac.mana << " many" << endl;
+    if (vyber_ability == 4) {
+        cout << "Cekas a vyckavas na reakci kvetiny..." << endl;
+        uspesna_akce = true;
+    } 
+    else if (vyber_postavy == 1) {
+        if (vyber_ability == 1 && hrac.mana >= hrac.abilityManaCost[0]) {
+            cout << "Pouzil jsi Powerhit a udelil jsi " << hrac.abilityDamage[0] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[0]; bbos.hp -= hrac.abilityDamage[0]; utocil_tento_tah = true; uspesna_akce = true;
+        } else if (vyber_ability == 2 && hrac.mana >= hrac.abilityManaCost[1]) {
+            cout << "Pouzil jsi Basic attack a udelil jsi " << hrac.abilityDamage[1] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[1]; bbos.hp -= hrac.abilityDamage[1]; utocil_tento_tah = true; uspesna_akce = true;
+        } else if (vyber_ability == 3 && hrac.mana >= hrac.abilityManaCost[2]) {
+            cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[2]; bbos.hp -= hrac.abilityDamage[2]; utocil_tento_tah = true; uspesna_akce = true;
         }
-        if(hrac.hp < 1){
-            cout << "UMREL JSI";
-            return 0;
+    } 
+    else if (vyber_postavy == 2) {
+        if (vyber_ability == 1 && hrac.mana >= hrac.abilityManaCost[0]) {
+            cout << "Pouzil jsi Shield a obranil jsi se na jedno kolo" << endl;
+            hrac.mana -= hrac.abilityManaCost[0]; uspesna_akce = true; 
+        } else if (vyber_ability == 2 && hrac.mana >= hrac.abilityManaCost[1]) {
+            cout << "Pouzil jsi Defend attack a udelil jsi " << hrac.abilityDamage[1] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[1]; bbos.hp -= hrac.abilityDamage[1]; utocil_tento_tah = true; uspesna_akce = true;
+        } else if (vyber_ability == 3 && hrac.mana >= hrac.abilityManaCost[2]) {
+            cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[2]; bbos.hp -= hrac.abilityDamage[2]; utocil_tento_tah = true; uspesna_akce = true;
         }
-    }while(vyber_ability < 1 || vyber_ability > 3);
-}while(boss.hp > 0 && hrac.hp > 0);
+    } 
+    else if (vyber_postavy == 3) {
+        if (vyber_ability == 1 && hrac.mana >= hrac.abilityManaCost[0]) {
+            cout << "Pouzil jsi Fireball a udelil jsi " << hrac.abilityDamage[0] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[0]; bbos.hp -= hrac.abilityDamage[0]; utocil_tento_tah = true; uspesna_akce = true;
+        } else if (vyber_ability == 2 && hrac.mana >= hrac.abilityManaCost[1]) {
+            cout << "Pouzil jsi Heal a vylecil jsi se o " << -hrac.abilityDamage[1] << " hp" << endl;
+            hrac.mana -= hrac.abilityManaCost[1]; hrac.hp -= hrac.abilityDamage[1]; uspesna_akce = true; 
+        } else if (vyber_ability == 3 && hrac.mana >= hrac.abilityManaCost[2]) {
+            cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[2]; bbos.hp -= hrac.abilityDamage[2]; utocil_tento_tah = true; uspesna_akce = true;
+        }
+    } 
+    else if (vyber_postavy == 4) {
+        if (vyber_ability == 1 && hrac.mana >= hrac.abilityManaCost[0]) {
+            cout << "Pouzil jsi Heal a vylecil jsi se o " << -hrac.abilityDamage[0] << " hp" << endl;
+            hrac.mana -= hrac.abilityManaCost[0]; hrac.hp -= hrac.abilityDamage[0]; uspesna_akce = true; 
+        } else if (vyber_ability == 2 && hrac.mana >= hrac.abilityManaCost[1]) {
+            cout << "Pouzil jsi Attack a udelil jsi " << hrac.abilityDamage[1] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[1]; bbos.hp -= hrac.abilityDamage[1]; utocil_tento_tah = true; uspesna_akce = true;
+        } else if (vyber_ability == 3 && hrac.mana >= hrac.abilityManaCost[2]) {
+            cout << "Pouzil jsi Ultimate a udelil jsi " << hrac.abilityDamage[2] << " damage" << endl;
+            hrac.mana -= hrac.abilityManaCost[2]; bbos.hp -= hrac.abilityDamage[2]; utocil_tento_tah = true; uspesna_akce = true;
+        }
+    }
 
-cout << "Gratuluji, porazil jsi hlavniho bose a stal ses legendou" << endl;
+    if (!uspesna_akce) {
+        cout << "Nemate dost many nebo neplatna volba, zvolte jinou abilitu." << endl;
+        continue; 
+    }
 
+    if (bbos.hp <= 0) break;
+
+    if (utocil_tento_tah) {
+        cekani = 0; 
+        if (!nastvany) {
+            nastvany = true;
+            cout << "!!! Bloomshade se probouzi k zivotu a stava se agresivni! !!!" << endl;
+        }
+    } else {
+        cekani++;
+    }
+
+    if (cekani >= 2 && nastvany) {
+        nastvany = false;
+        bonus_poskozeni = 0;
+        cekani = 0; 
+        cout << "Bloomshade se uklidnil a jeho kvety ztraceji na agresivite. (Bonusove poskozeni resetovano)" << endl;
+    }
+
+    if (prvni_tah) {
+        cout << "Bloomshade se jen nevinne kyve ve vetru... laka te bliz. (Pousti tah)" << endl;
+        prvni_tah = false;
+    } 
+    else if (!nastvany) {
+        cout << "Bloomshade neni vyprovokovany a nedela nic..." << endl;
+    } 
+    else {
+        int random_cislo_uhyb = rand() % 100 + 1;
+        int aktualni_dmg = bbos.attack + bonus_poskozeni;
+
+        if (random_cislo_uhyb <= 30) {
+            cout << "Uhybl jsi! Bloomshade te svymi slehy netrefil." << endl;
+        } else {
+            cout << "Bloomshade utoci svymi kvetinovymi upsaly! Udeluje ti " << aktualni_dmg << " damage." << endl;
+            hrac.hp -= aktualni_dmg;
+        }
+
+        bonus_poskozeni += 5;
+        cout << "Bloomshade duplikuje sve kvety! Do dalsiho kola se jeho poskozeni zvysuje o 5." << endl;
+    }
+
+    cout << "---------------------------------" << endl;
+    cout << "Tobe zbylo: " << hrac.hp << " hp | " << hrac.mana << " many" << endl;
+    cout << "Bloomshade zbylo: " << bbos.hp << " hp" << endl;
+    cout << "---------------------------------" << endl;
 }
 
-
+if (hrac.hp <= 0) {
+    cout << "ZEMREL JSI..." << endl;
+    return 0;
+} else {
+    cout << "Gratuluji, porazil jsi hlavniho bosse Bloomshade a stal ses legendou!" << endl;
+}
+}
