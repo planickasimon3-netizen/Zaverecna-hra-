@@ -2906,5 +2906,6 @@ if (hrac.hp <= 0) {
     return 0;
 } else {
     cout << "Gratuluji, porazil jsi hlavniho bosse Bloomshade a stal ses legendou!" << endl;
+    cout << "Jsi nejlepsi ze vsech";
 }
 }
